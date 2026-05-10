@@ -89,6 +89,55 @@ Variables
 
 /*
 ---------------
+Keyframes
+---------------
+*/
+
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/*
+---------------
 Icons
 ---------------
 */
@@ -101,6 +150,14 @@ svg {
 .portfolio-links-list svg {
   border-radius: 50%;
   border: 1.5px solid rgba(255, 255, 255, 0.4);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.portfolio-links-list svg:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
 }
 
 header .portfolio-links-list svg {
@@ -157,8 +214,9 @@ Header
 
 header {
   color: #fff;
-  background: #a855f7;
   background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #3b82f6 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
 }
 
 header .container {
@@ -174,6 +232,7 @@ header .container {
   border: 5px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  animation: fadeSlideDown 0.6s ease both;
 }
 
 .ashley-img {
@@ -202,6 +261,7 @@ header .container {
   background: rgba(255, 255, 255, 0.18);
   border: 2px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  animation: fadeSlideDown 0.6s ease 0.15s both;
 }
 
 .intro h1 {
@@ -227,6 +287,7 @@ main {
 main h2 {
   margin-bottom: 1rem;
   color: #4c1d95;
+  animation: fadeSlideUp 0.5s ease 0.2s both;
 }
 
 .project-grid {
@@ -235,12 +296,41 @@ main h2 {
   gap: 1rem;
 }
 
+/* Staggered entrance for project cards */
 .project-card {
   background-color: #fff;
   border-radius: var(--radius);
   border: 2px solid #e9d5ff;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  animation: fadeSlideUp 0.5s ease both;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0.6rem 2rem rgba(99, 102, 241, 0.2);
+}
+
+.project-card:nth-child(1) {
+  animation-delay: 0.25s;
+}
+.project-card:nth-child(2) {
+  animation-delay: 0.35s;
+}
+.project-card:nth-child(3) {
+  animation-delay: 0.45s;
+}
+.project-card:nth-child(4) {
+  animation-delay: 0.55s;
+}
+.project-card:nth-child(5) {
+  animation-delay: 0.65s;
+}
+.project-card:nth-child(6) {
+  animation-delay: 0.75s;
 }
 
 .project-img-container {
@@ -248,6 +338,8 @@ main h2 {
   color: #fff;
   text-align: center;
   align-content: center;
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
 }
 
 .card-1 {
@@ -285,6 +377,17 @@ main h2 {
   gap: 1rem;
 }
 
+.project-links svg {
+  transition:
+    transform 0.2s ease,
+    fill 0.2s ease;
+}
+
+.project-links svg:hover {
+  transform: scale(1.2);
+  fill: #a855f7;
+}
+
 .project-description {
   margin: 1rem;
   color: #7c3aed;
@@ -298,14 +401,17 @@ Footer
 
 footer {
   color: #fbfaf6;
-  background-color: #a855f7;
   background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #2563eb 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  animation-delay: 2s;
 }
 
 footer .container {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  animation: fadeIn 0.6s ease 0.3s both;
 }
 
 footer p {
@@ -339,6 +445,22 @@ footer .portfolio-links-list {
 
 .photo-credit a:visited {
   color: #f269af;
+}
+
+/*
+---------------
+Reduced motion
+---------------
+*/
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /*
